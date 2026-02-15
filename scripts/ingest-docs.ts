@@ -69,7 +69,7 @@ interface EmbeddingResponse {
 
 class EmbeddingService {
   private provider: 'openai' | 'zhipu';
-  private apiKey: string;
+  private apiKey!: string; // Definite assignment assertion
 
   constructor() {
     this.provider = (process.env.EMBEDDING_PROVIDER as 'openai' | 'zhipu') || 'openai';
