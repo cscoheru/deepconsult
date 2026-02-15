@@ -54,6 +54,7 @@ export interface DiagnosisSession {
   data_talent: Record<string, any>;
 
   total_score: number;
+  summary_report: string | null; // AI生成的最终总结
   created_at: string; // TIMESTAMPTZ
   updated_at: string; // TIMESTAMPTZ
 }
