@@ -4,14 +4,13 @@
  * 使用 @supabase/ssr 替代已废弃的 auth-helpers
  */
 
-import { createServerClient } from '@supabase/ssr';
-import { cookies } from 'next/headers';
-import { Database } from '@/types/database'; // 将在下一步生成
+import { createServerClient as createSupabaseClient } from '@supabase/ssr'
+import { cookies } from 'next/headers'
 
 export const createServerClient = async () => {
   const cookieStore = await cookies();
 
-  return createServerClient<Database>(
+  return createSupabaseClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
@@ -37,16 +36,16 @@ export const createServerClient = async () => {
 /**
  * 便捷函数：服务端获取当前用户
  */
-export async function getCurrentUserServer() {
+export const getCurrentUserServer = async () => {
   const supabase = await createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   return user;
-}
+};
 
 /**
  * 便捷函数：服务端获取当前用户的 Profile
  */
-export async function getCurrentUserProfileServer() {
+export const getCurrentUserProfileServer = async () => {
   const supabase = await createServerClient();
   const user = await getCurrentUserServer();
 
@@ -59,4 +58,4 @@ export async function getCurrentUserProfileServer() {
     .select('*')
     .eq('id', user.id)
     .single();
-}
+};
