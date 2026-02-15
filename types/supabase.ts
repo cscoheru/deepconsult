@@ -118,6 +118,28 @@ export interface LeadWithProfile extends Lead {
 }
 
 // ============================================
+// KNOWLEDGE DOCS (RAG 知识库)
+// ============================================
+export interface KnowledgeDoc {
+  id: string; // UUID
+  content: string; // 文档切片内容
+  embedding: string; // vector(1536) - Supabase stores as string
+  category: 'strategy' | 'structure' | 'performance' | 'compensation' | 'talent';
+  source: string; // 来源文件路径
+  chunk_index: number; // 切片索引
+  metadata: Record<string, any>; // 额外元数据
+  created_at: string; // TIMESTAMPTZ
+}
+
+export interface KnowledgeDocInsert extends Omit<KnowledgeDoc, 'id' | 'created_at'> {
+  id?: string;
+}
+
+// ============================================
+// JOIN TYPES (常用查询结果)
+// ============================================
+
+// ============================================
 // DATABASE RESPONSES (Supabase格式)
 // ============================================
 export type DatabaseResponse<T> = {

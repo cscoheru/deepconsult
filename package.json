@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start -p 3001",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "ingest:docs": "tsx scripts/ingest-docs.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -72,6 +73,7 @@
   "devDependencies": {
     "@types/node": "^20.10.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "^16.1.6"
+    "eslint-config-next": "^16.1.6",
+    "tsx": "^4.19.2"
   }
 }
